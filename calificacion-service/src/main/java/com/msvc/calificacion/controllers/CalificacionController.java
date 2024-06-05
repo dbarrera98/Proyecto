@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/calificaciones")
@@ -35,4 +37,27 @@ public class CalificacionController {
     public ResponseEntity<List<Calificacion>> listarCalificacionesPorHotelId(@PathVariable String hotelId){
         return ResponseEntity.ok(calificacionService.getCalificacionesByHotelId(hotelId));
     }
+
+    @PutMapping("/{calificacionId}")
+    public ResponseEntity<Calificacion> actualizarCalificacion(@PathVariable String calificacionId, @RequestBody Calificacion calificacion){
+        calificacion.setCalificacionId(calificacionId);
+        return ResponseEntity.ok(calificacionService.updateCalificacion(calificacion));
+    }
+   /* @DeleteMapping("/{calificacionId}")
+    public ResponseEntity<Void> eliminarCalificacion(@PathVariable String calificacionId){
+        calificacionService.deleteCalificacion(calificacionId);
+        return ResponseEntity.noContent().build();
+    }*/
+
+    @DeleteMapping("/{calificacionId}")
+    public ResponseEntity<Map<String, String>> eliminarCalificacion(@PathVariable String calificacionId) {
+        calificacionService.deleteCalificacion(calificacionId);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Calificación eliminada correctamente");
+        return ResponseEntity.ok(response);
+    }
+
+
 }
+
+

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CalificacionServiceImpl implements CalificacionService {
@@ -16,11 +17,13 @@ public class CalificacionServiceImpl implements CalificacionService {
 
     @Override
     public Calificacion create(Calificacion calificacion) {
+
         return calificacionRepository.save(calificacion);
     }
 
     @Override
     public List<Calificacion> getCalificaciones() {
+
         return calificacionRepository.findAll();
     }
 
@@ -32,5 +35,14 @@ public class CalificacionServiceImpl implements CalificacionService {
     @Override
     public List<Calificacion> getCalificacionesByHotelId(String hotelId) {
         return calificacionRepository.findByHotelId(hotelId);
+    }
+
+    @Override
+    public Calificacion updateCalificacion(Calificacion calificacion) {
+        return calificacionRepository.save(calificacion);
+    }
+    @Override
+    public void deleteCalificacion(String calificacionId) {
+        calificacionRepository.deleteById(calificacionId);
     }
 }
