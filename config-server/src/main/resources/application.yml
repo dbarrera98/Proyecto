@@ -1,0 +1,13 @@
+server:
+  port: 8092
+
+spring:
+  application:
+    name: CONFIG-SERVER
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/dbarrera98/microservicios-config
+          clone-on-start: true
